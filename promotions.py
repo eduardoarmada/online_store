@@ -16,10 +16,11 @@ class PercentageDiscount(Promotions):
         self.percentage = percentage
 
     def apply_promotion(self, product, quantity):
-        return (product.price * (quantity // 2)) * (1 - self.percentage / 100) + product.price * (quantity - (quantity // 2))
+        return product.price * quantity * (1 - self.percentage / 100)
 
     def __str__(self):
         return "Percentage Discount"
+
 
 class SecondHalfPricePromotion(Promotions):
     def apply_promotion(self, product, quantity):
@@ -31,7 +32,7 @@ class SecondHalfPricePromotion(Promotions):
 
 class Buy2Get1Free(Promotions):
     def apply_promotion(self, product, quantity):
-        return product.price * (quantity - (quantity // 3)) * 2
+        return product.price * (quantity // 3) * 2 + product.price * quantity % 3
 
     def __str__(self):
         return "Buy 2, get 1 free!"

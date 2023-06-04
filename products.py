@@ -61,7 +61,11 @@ class NonStockedProduct(Product):
         super().__init__(name, price, quantity)
 
     def buy(self, quantity):
-        return quantity * self.price
+        if self.promotion is None:
+            price_of_purchase = quantity * self.price
+            return price_of_purchase
+        else:
+            return self.promotion.apply_promotion(self, quantity)
 
     def show(self):
         print(f"{self.name}, Price: {self.price}, Discount: {self.promotion}, Quantity: Unlimited stock")
