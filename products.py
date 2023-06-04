@@ -6,6 +6,8 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.active = True
+        if self.quantity < 0:
+            self.active = False
         if self.name == "":
             raise Exception
         if self.price < 0 or self.quantity < 0:
